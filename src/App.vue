@@ -6,14 +6,16 @@
       :poster-url="posterUrl"
     /> -->
     <NavBar />
+    <CarouselContainer />
   </div>
 </template>
 
 <script>
 // import VideoPlayer from '@components/player/VideoPlayer.vue';
 import NavBar from '@components/navbar/NavBar.vue';
+import CarouselContainer from '@components/carousel/CarouselContainer.vue';
 export default {
-  components: { NavBar },
+  components: { NavBar, CarouselContainer },
   // data() {
   //   return {
   //     licenseServer: 'https://widevine-proxy.appspot.com/proxy',
@@ -25,7 +27,7 @@ export default {
   // }
   mounted() {
     this.initNavigation()
-    this.registerKeyListener()
+    // this.registerKeyListener()
   },
   beforeUnmount() {
     this.destroy()
@@ -35,7 +37,7 @@ export default {
       // Initialize
       window.SpatialNavigation.init()
       window.SpatialNavigation.add('navbar', {
-        selector: '.navbar-item',
+        selector: '.dpad-focusable',
         straightOnly: false,
         straightOverlapThreshold: 0.5,
         rememberSource: true,

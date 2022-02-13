@@ -2,9 +2,9 @@
   <div class="navbar">
     <img src="@assets/img/sofia-digital-logo.png" alt="" />
     <div class="navbar-menu">
-      <a class="navbar-item" href="#">Video</a>
-      <a class="navbar-item" href="#">Feature</a>
-      <a class="navbar-item" href="#">Contact</a>
+      <a class="navbar-item dpad-focusable" href="#">Video</a>
+      <a class="navbar-item dpad-focusable" href="#">Feature</a>
+      <a class="navbar-item dpad-focusable" href="#">Contact</a>
     </div>
   </div>
 </template>
@@ -12,9 +12,6 @@
 <script>
 export default {
   name: 'NavBar',
-  props: {
-    msg: String
-  }
 }
 </script>
 
