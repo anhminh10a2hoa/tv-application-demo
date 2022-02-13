@@ -2,23 +2,8 @@
   <div class="gridList">
     <p class="title">{{title}}</p>
     <Swiper :options="swiperOptions">
-      <SwiperSlide class="swiper-slide dpad-focusable">
-        <img src="@assets/images/program/tinhmong_movie.jpg" alt="" />
-      </SwiperSlide>
-      <SwiperSlide class="swiper-slide dpad-focusable">
-        <img src="@assets/images/program/spontaneous_movie.png" alt="" />
-      </SwiperSlide>
-      <SwiperSlide class="swiper-slide dpad-focusable">
-        <img src="@assets/images/program/bigbug_movie.jpg" alt="" />
-      </SwiperSlide>
-      <SwiperSlide class="swiper-slide dpad-focusable">
-        <img src="@assets/images/program/chandai_movie.jpg" alt="" />
-      </SwiperSlide>
-      <SwiperSlide class="swiper-slide dpad-focusable">
-        <img src="@assets/images/program/dreamland_movie.png" alt="" />
-      </SwiperSlide>
-      <SwiperSlide class="swiper-slide dpad-focusable">
-        <img src="@assets/images/program/bhm_movie.png" alt="" />
+      <SwiperSlide class="swiper-slide dpad-focusable" v-for="(program, index) in programItems" :key="index">
+        <img :src="programImage(program)" alt="" />
       </SwiperSlide>
     </Swiper>
   </div>
@@ -37,6 +22,10 @@ export default {
     title: {
       type: String,
       default: 'Movie'
+    },
+    programItems: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -49,6 +38,16 @@ export default {
         },
       }
     }
+  },
+  methods: {
+    programImage(imageName) {
+      try {
+        const image = require('@assets/images/program/' + imageName)
+        return image
+      } catch (e) {
+        return ''
+      }
+    },
   },
   setup() {
     const onSwiper = (swiper) => {
@@ -87,8 +86,8 @@ export default {
     img {
       position: relative;
       width: auto;
-      min-width: 100%;
-      max-width: 100%;
+      min-width: 99%;
+      max-width: 99%;
       height: auto;
       height: 130px;
       border-radius: 10px;
@@ -96,6 +95,7 @@ export default {
 
     &:focus {
       transform: scale(1.2);
+      z-index: 999;
     }
   }
   .swiper-slide-duplicate {

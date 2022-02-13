@@ -7,8 +7,7 @@
     /> -->
     <NavBar />
     <Banner :banner-item="appData.banner"/>
-    <GridList title="Newest Movie"/>
-    <GridList title="Common Movie"/>
+    <GridList v-for="grid in appData.grid" :key="grid.title" :title="grid.title" :program-items="grid.items"/>
   </div>
   <div v-else>Loading...</div>
 </template>
@@ -38,6 +37,12 @@ export default {
     axios.get('/data.json').then((res) => {
       this.appData = res.data
       this.loading = false
+      setTimeout(() => {
+        // Make the *currently existing* navigable elements focusable.
+        window.SpatialNavigation.makeFocusable();
+        // Focus the first navigable element.
+        window.SpatialNavigation.focus();
+      }, 0)
     }).catch((err) => {
       console.log(err)
     })
@@ -49,17 +54,12 @@ export default {
     initNavigation() {
       // Initialize
       window.SpatialNavigation.init()
-      window.SpatialNavigation.add('navbar', {
+      window.SpatialNavigation.add('app', {
         selector: '.dpad-focusable',
-        straightOnly: false,
+        straightOnly: true,
         straightOverlapThreshold: 0.5,
         rememberSource: true,
       })
-      // Make the *currently existing* navigable elements focusable.
-      window.SpatialNavigation.makeFocusable();
-
-      // Focus the first navigable element.
-      window.SpatialNavigation.focus();
     },
     destroy() {
       window.SpatialNavigation.uninit()
