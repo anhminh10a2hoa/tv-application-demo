@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <img src="@assets/img/sofia-digital-logo.png" alt="" />
+    <img src="@assets/images/sofia-digital-logo.png" alt="" />
     <div class="navbar-menu">
       <a class="navbar-item dpad-focusable" href="#">Video</a>
       <a class="navbar-item dpad-focusable" href="#">Feature</a>
@@ -20,34 +20,35 @@ export default {
 @import '@design';
 .navbar {
   margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 50px;
+  height: 80px;
 
   img {
-    height: 80px;
+    height: 70px;
     display: inline-block;
   }
   .navbar-menu {
     display: inline-block;
     position: absolute;
-    margin-left: 50px;
+    right: 50px;
+    margin-top: -5px;
 
     .navbar-item {
       text-decoration: none;
       line-height: 80px;
       height: 80px;
       margin-right: 30px;
-      padding: 10px;
+      padding: 12px 25px;
       color: $color-title-navbar;
-      font-weight: 600;
+      font-weight: bold;
       font-size: 20px;
       z-index: -1;
-
-      &:hover {
-        color: $color-title-navbar-hover;
-      }
+      background-color: $color-background-menu-item;
+      border-radius: 80px;
 
       &:focus {
-        color: $color-title-navbar-focus;
+        color: $color-background-menu-item;
+        background-color: $color-title-navbar-focus
       }
     }
   }

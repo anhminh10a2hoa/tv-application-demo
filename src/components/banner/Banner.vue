@@ -2,20 +2,20 @@
   <div class="banner">
     <Swiper ref="mySwiper" :options="swiperOptions">
       <SwiperSlide class="swiper-slide">
-        <img src="@assets/img/inception_movie_banner.jpg" alt="" />
+        <img src="@assets/images/banner/inception_movie_banner.jpg" alt="" />
       </SwiperSlide>
       <SwiperSlide class="swiper-slide">
-        <img src="@assets/img/civil_war_movie_banner.jpg" alt="" />
+        <img src="@assets/images/banner/civil_war_movie_banner.jpg" alt="" />
       </SwiperSlide>
       <SwiperSlide class="swiper-slide">
-        <img src="@assets/img/avenger_movie_banner.jpg" alt="" />
+        <img src="@assets/images/banner/avenger_movie_banner.jpg" alt="" />
       </SwiperSlide>
     </Swiper>
     <div
-      class="swiper-button-prev dpad-focusable"
+      class="swiper-button-prev swiper-button dpad-focusable"
     ></div>
     <div
-      class="swiper-button-next dpad-focusable"
+      class="swiper-button-next swiper-button dpad-focusable"
     ></div>
   </div>
 </template>
@@ -24,7 +24,7 @@
 import 'swiper/css/swiper.css'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 export default {
-  name: 'CarouselContainer',
+  name: 'Banner',
   components: {
     Swiper,
     SwiperSlide
@@ -70,32 +70,36 @@ export default {
 <style lang="scss">
 @import '@design';
 .banner {
-  display: block;
-  z-index: -1;
-  height: 300px;
-  background: linear-gradient(180deg, #242424, black, transparent);
-  
   .swiper-slide {
     width: 50rem;
-    opacity: 0.7;
     img {
       position: relative;
       width: auto;
-      min-width: 99%;
-      max-width: 99%;
+      min-width: 100%;
+      max-width: 100%;
       height: auto;
       pointer-events: none;
       height: 300px;
+      opacity: 0.8;
+      border-radius: 10px;
     }
   }
 
-  .swiper-button-next,
-  .swiper-button-prev {
+  .swiper-button {
     width: 22px;
     height: 44px;
     color: white;
     position: absolute;
     top: 250px;
+
+    &::after {
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    &:focus {
+      color: $color-swiper-button-active
+    }
   }
 }
 </style>

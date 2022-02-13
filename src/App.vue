@@ -6,16 +6,16 @@
       :poster-url="posterUrl"
     /> -->
     <NavBar />
-    <CarouselContainer />
+    <Banner />
   </div>
 </template>
 
 <script>
 // import VideoPlayer from '@components/player/VideoPlayer.vue';
 import NavBar from '@components/navbar/NavBar.vue';
-import CarouselContainer from '@components/carousel/CarouselContainer.vue';
+import Banner from '@components/banner/Banner.vue';
 export default {
-  components: { NavBar, CarouselContainer },
+  components: { NavBar, Banner },
   // data() {
   //   return {
   //     licenseServer: 'https://widevine-proxy.appspot.com/proxy',
@@ -84,5 +84,11 @@ body {
   position: absolute;
   top: 0px;
   left: 0px;
+}
+
+.dpad-focusable {
+  &:focus {
+    outline: none;
+  }
 }
 </style>

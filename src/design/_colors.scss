@@ -1,7 +1,8 @@
-$color-background: #242424;
+$color-background: #001c46;
 
 //navbar
-$color-title-navbar: #fff;
-$color-title-navbar-hover: #e37600;
-$color-title-navbar-active: $color-title-navbar-hover;
-$color-title-navbar-focus: $color-title-navbar-hover;
+$color-title-navbar: #c7c7c7;
+$color-title-navbar-focus: #e37600;
+
+$color-swiper-button-active: $color-title-navbar-focus;
+$color-background-menu-item: $color-background;
