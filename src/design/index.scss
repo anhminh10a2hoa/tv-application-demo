@@ -1,0 +1,7 @@
+@import 'sizes';
+@import 'colors';
+
+:export {
+  global-app-width: $size-app-width;
+  global-app-height: $size-app-height;
+}
