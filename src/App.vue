@@ -5,15 +5,15 @@
       :manifest-url="manifestUrl"
       :poster-url="posterUrl"
     /> -->
-    <TopMenu />
+    <NavBar />
   </div>
 </template>
 
 <script>
 // import VideoPlayer from '@components/player/VideoPlayer.vue';
-import TopMenu from '@components/topmenu/TopMenu.vue';
+import NavBar from '@components/navbar/NavBar.vue';
 export default {
-  components: { TopMenu },
+  components: { NavBar },
   // data() {
   //   return {
   //     licenseServer: 'https://widevine-proxy.appspot.com/proxy',
@@ -23,6 +23,34 @@ export default {
   //       'https://upload.wikimedia.org/wikipedia/commons/a/a7/Big_Buck_Bunny_thumbnail_vlc.png'
   //   };
   // }
+  mounted() {
+    this.initNavigation()
+    this.registerKeyListener()
+  },
+  beforeUnmount() {
+    this.destroy()
+  },
+  methods: {
+    initNavigation() {
+      // Initialize
+      window.SpatialNavigation.init()
+      window.SpatialNavigation.add('navbar', {
+        selector: '.navbar-item',
+        straightOnly: false,
+        straightOverlapThreshold: 0.5,
+        rememberSource: true,
+      })
+      // Make the *currently existing* navigable elements focusable.
+      window.SpatialNavigation.makeFocusable();
+
+      // Focus the first navigable element.
+      window.SpatialNavigation.focus();
+    },
+    destroy() {
+      window.SpatialNavigation.uninit()
+      this.releaseKeyListener()
+    }
+  }
 };
 </script>
 
@@ -35,22 +63,24 @@ body {
 }
 
 body {
+  width: $size-app-width;
+  height: $size-app-height;
   padding: 0;
   margin: 0;
   overflow: hidden;
   font-family: Tiresias, TiresiasScreenfont, sans-serif;
   font-size: 18px;
-  color: #000;
   background: $color-background;
+  color: #000;
   background-image: none !important;
 }
+
 .container {
-  max-width: 1280px;
-  max-height: 720px;
-  height: 720px;
-  width: 1280px;
+  width: $size-app-width;
+  height: $size-app-height;
+  overflow: hidden;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 0px;
 }
 </style>
