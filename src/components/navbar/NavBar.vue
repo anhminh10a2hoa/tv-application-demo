@@ -2,9 +2,9 @@
   <div class="navbar">
     <img src="@assets/images/sofia-digital-logo.png" alt="" />
     <div class="navbar-menu">
-      <a class="navbar-item dpad-focusable" href="#">Video</a>
-      <a class="navbar-item dpad-focusable" href="#">Feature</a>
-      <a class="navbar-item dpad-focusable" href="#">Contact</a>
+      <a class="navbar-item dpad-focusable" href="#">UI App</a>
+      <a class="navbar-item dpad-focusable" href="#">Players</a>
+      <a class="navbar-item dpad-focusable" href="#">Features</a>
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
       font-size: 20px;
       z-index: -1;
       background-color: $color-background-menu-item;
-      border-radius: 80px;
+      border-radius: 40px;
 
       &:focus {
         color: $color-background-menu-item;

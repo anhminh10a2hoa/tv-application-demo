@@ -1,33 +1,46 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!loading">
     <!-- <VideoPlayer
       :license-server="licenseServer"
       :manifest-url="manifestUrl"
       :poster-url="posterUrl"
     /> -->
     <NavBar />
-    <Banner />
+    <Banner :banner-item="appData.banner"/>
+    <GridList title="Newest Movie"/>
+    <GridList title="Common Movie"/>
   </div>
+  <div v-else>Loading...</div>
 </template>
 
 <script>
 // import VideoPlayer from '@components/player/VideoPlayer.vue';
 import NavBar from '@components/navbar/NavBar.vue';
 import Banner from '@components/banner/Banner.vue';
+import GridList from '@components/grid/GridList.vue';
+import axios from 'axios';
 export default {
-  components: { NavBar, Banner },
-  // data() {
-  //   return {
-  //     licenseServer: 'https://widevine-proxy.appspot.com/proxy',
-  //     manifestUrl:
-  //       'https://dash.akamaized.net/dash264/TestCases/1c/qualcomm/2/MultiRate.mpd',
-  //     posterUrl:
-  //       'https://upload.wikimedia.org/wikipedia/commons/a/a7/Big_Buck_Bunny_thumbnail_vlc.png'
-  //   };
-  // }
+  components: { NavBar, Banner, GridList },
+  data() {
+    return {
+      appData: null,
+      loading: true,
+      licenseServer: 'https://widevine-proxy.appspot.com/proxy',
+      manifestUrl:
+        'https://dash.akamaized.net/dash264/TestCases/1c/qualcomm/2/MultiRate.mpd',
+      posterUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/a/a7/Big_Buck_Bunny_thumbnail_vlc.png'
+    };
+  },
   mounted() {
     this.initNavigation()
     // this.registerKeyListener()
+    axios.get('/data.json').then((res) => {
+      this.appData = res.data
+      this.loading = false
+    }).catch((err) => {
+      console.log(err)
+    })
   },
   beforeUnmount() {
     this.destroy()

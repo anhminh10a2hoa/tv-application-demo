@@ -1,14 +1,8 @@
 <template>
   <div class="banner">
-    <Swiper ref="mySwiper" :options="swiperOptions">
-      <SwiperSlide class="swiper-slide">
-        <img src="@assets/images/banner/inception_movie_banner.jpg" alt="" />
-      </SwiperSlide>
-      <SwiperSlide class="swiper-slide">
-        <img src="@assets/images/banner/civil_war_movie_banner.jpg" alt="" />
-      </SwiperSlide>
-      <SwiperSlide class="swiper-slide">
-        <img src="@assets/images/banner/avenger_movie_banner.jpg" alt="" />
+    <Swiper :options="swiperOptions">
+      <SwiperSlide class="swiper-slide" v-for="(item, index) in bannerItem" :key="index">
+        <img :src="bannerImage(item)" alt="" />
       </SwiperSlide>
     </Swiper>
     <div
@@ -28,6 +22,12 @@ export default {
   components: {
     Swiper,
     SwiperSlide
+  },
+  props: {
+    bannerItem: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
@@ -50,6 +50,19 @@ export default {
         loop: true,
       }
     }
+  },
+  methods: {
+    bannerImage(imageName) {
+      try {
+        const image = require('@assets/images/banner/' + imageName)
+        return image
+      } catch (e) {
+        return ''
+      }
+    },
+  },
+  mounted() {
+    console.log(this.bannerItem)
   },
   setup() {
     const onSwiper = (swiper) => {
