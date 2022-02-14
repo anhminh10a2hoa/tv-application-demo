@@ -1,6 +1,6 @@
 <template>
   <div class="gridList">
-    <p class="title">{{title}}</p>
+    <p class="title" :class="'title_grid_' + gridId">{{title}}</p>
     <Swiper :options="swiperOptions">
       <SwiperSlide class="swiper-slide dpad-focusable" v-for="(program, index) in programItems" :key="index">
         <img :src="programImage(program)" alt="" />
@@ -26,6 +26,10 @@ export default {
     programItems: {
       type: Array,
       default: () => []
+    },
+    gridId: {
+      type: Number,
+      default: -1
     }
   },
   data() {
@@ -79,10 +83,9 @@ export default {
     color: #fff;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: -1px;
+    margin-bottom: 20px;
   }
   .swiper-slide {
-    margin-top: 15px;
     img {
       position: relative;
       width: auto;
@@ -94,8 +97,10 @@ export default {
     }
 
     &:focus {
-      transform: scale(1.2);
-      z-index: 999;
+      img {
+        border: 3px solid $color-swiper-button-active;
+        z-index: 999;
+      }
     }
   }
   .swiper-slide-duplicate {

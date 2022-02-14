@@ -7,7 +7,7 @@
     /> -->
     <NavBar />
     <Banner :banner-item="appData.banner"/>
-    <GridList v-for="grid in appData.grid" :key="grid.title" :title="grid.title" :program-items="grid.items"/>
+    <GridList v-for="(grid, index) in appData.grid" :key="index" :title="grid.title" :program-items="grid.items" :grid-id="index"/>
   </div>
   <div v-else>Loading...</div>
 </template>
@@ -18,6 +18,7 @@ import NavBar from '@components/navbar/NavBar.vue';
 import Banner from '@components/banner/Banner.vue';
 import GridList from '@components/grid/GridList.vue';
 import axios from 'axios';
+// import { VK_UP, isKey } from '@state/keycodes'
 export default {
   components: { NavBar, Banner, GridList },
   data() {
@@ -33,7 +34,7 @@ export default {
   },
   mounted() {
     this.initNavigation()
-    // this.registerKeyListener()
+    this.registerFocusListerner()
     axios.get('/data.json').then((res) => {
       this.appData = res.data
       this.loading = false
@@ -61,9 +62,17 @@ export default {
         rememberSource: true,
       })
     },
+    registerFocusListerner() {
+      window.addEventListener('sn:willfocus', this.onWillFocus)
+    },
+    unregisterFocusListerner() {
+      window.removeEventListener('sn:willfocus', this.onWillFocus)
+    },
+    onWillFocus() {
+    },
     destroy() {
       window.SpatialNavigation.uninit()
-      this.releaseKeyListener()
+      this.unregisterFocusListerner()
     }
   }
 };

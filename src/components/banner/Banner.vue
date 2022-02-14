@@ -1,15 +1,15 @@
 <template>
-  <div class="banner">
-    <Swiper :options="swiperOptions">
+  <div class="banner dpad-focusable">
+    <Swiper :options="swiperOptions" ref="bannerCarousel">
       <SwiperSlide class="swiper-slide" v-for="(item, index) in bannerItem" :key="index">
         <img :src="bannerImage(item)" alt="" />
       </SwiperSlide>
     </Swiper>
     <div
-      class="swiper-button-prev swiper-button dpad-focusable"
+      class="swiper-button-prev swiper-button"
     ></div>
     <div
-      class="swiper-button-next swiper-button dpad-focusable"
+      class="swiper-button-next swiper-button"
     ></div>
   </div>
 </template>
@@ -17,6 +17,7 @@
 <script>
 import 'swiper/css/swiper.css'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { isKey, VK_LEFT, VK_RIGHT } from '@state/keycodes'
 export default {
   name: 'Banner',
   components: {
@@ -51,7 +52,13 @@ export default {
       }
     }
   },
+  mounted() {
+    document.addEventListener('keydown', this.onKeyDown, true)
+  },
   methods: {
+    swiper() {
+      return this.$refs.bannerCarousel ? this.$refs.bannerCarousel.$swiper : null
+    },
     bannerImage(imageName) {
       try {
         const image = require('@assets/images/banner/' + imageName)
@@ -60,9 +67,15 @@ export default {
         return ''
       }
     },
-  },
-  mounted() {
-    console.log(this.bannerItem)
+    onKeyDown($event) {
+      if (document.activeElement.classList.contains('banner')) {
+        if (isKey($event.keyCode, VK_LEFT)) {
+          this.swiper().slidePrev(0, false)
+        } else if (isKey($event.keyCode, VK_RIGHT)) {
+          this.swiper().slideNext(0, false)
+        }
+      }
+    },
   },
   setup() {
     const onSwiper = (swiper) => {
@@ -76,6 +89,9 @@ export default {
       onSlideChange,
     };
   },
+  beforeUnmount() {
+    document.removeEventListener('keydown', this.onKeyDown, true)
+  }
 }
 </script>
 
@@ -109,10 +125,11 @@ export default {
       font-size: 40px;
       font-weight: 700;
     }
+  }
 
-    &:focus {
-      color: $color-swiper-button-active
-    }
+  &:focus {
+    border: 2px solid $color-swiper-button-active;
+    margin: -2px;
   }
 }
 </style>

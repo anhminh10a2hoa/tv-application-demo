@@ -8,7 +8,7 @@ module.exports = {
         '@assets': path.resolve(__dirname, 'src/assets'),
         '@state': path.resolve(__dirname, 'src/state'),
         '@components': path.resolve(__dirname, 'src/components'),
-        '@design': path.resolve(__dirname, 'src/design')
+        '@design': path.resolve(__dirname, 'src/design'),
       },  
     },  
   }
