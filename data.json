@@ -1,0 +1,13 @@
+{
+  "banner": ["avenger_movie_banner.jpg", "civil_war_movie_banner.jpg", "inception_movie_banner.jpg"],
+  "grid": [
+    {
+      "title": "Newest Movie",
+      "items": ["tinhmong_movie.jpg", "spontaneous_movie.png", "bigbug_movie.jpg", "chandai_movie.jpg", "dreamland_movie.png", "bhm_movie.png"]
+    },
+    {
+      "title": "Common Movie",
+      "items": ["sanquy_movie.jpg", "squidgame_movie.jpg", "vincenzo_movie.jpg", "toyboy_movie.jpg", "hdnk_movie.jpg", "keluadao_movie.jpg"]
+    }
+  ]
+}
