@@ -6,6 +6,8 @@ import PlayerView from '@src/views/PlayerView.vue'
 Vue.use(Router)
 
 export default new Router({
+  base: '/',
+  mode: 'history',
   routes: [
     { path: '/', component: UIView },
     { path: '/players', component: PlayerView },

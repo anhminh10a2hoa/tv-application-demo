@@ -6,7 +6,7 @@
     },
     {
       "title": "Players",
-      "routerLink": "/#/players"
+      "routerLink": "/players"
     },
     {
       "title": "Features",
