@@ -2,9 +2,7 @@
   <div class="navbar">
     <img src="@assets/images/sofia-digital-logo.png" alt="" />
     <div class="navbar-menu">
-      <a class="navbar-item dpad-focusable" href="#">UI App</a>
-      <a class="navbar-item dpad-focusable" href="#">Players</a>
-      <a class="navbar-item dpad-focusable" href="#">Features</a>
+      <a v-for="item in navbarItem" :key="item.title" class="navbar-item dpad-focusable" :href="item.routerLink">{{item.title}}</a>
     </div>
   </div>
 </template>
@@ -12,6 +10,12 @@
 <script>
 export default {
   name: 'NavBar',
+  props: {
+    navbarItem: {
+      type: Array,
+      default: () => []
+    }
+  },
 }
 </script>
 

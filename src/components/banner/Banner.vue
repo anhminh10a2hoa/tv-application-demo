@@ -89,7 +89,7 @@ export default {
       onSlideChange,
     };
   },
-  beforeUnmount() {
+  beforeDestroy() {
     document.removeEventListener('keydown', this.onKeyDown, true)
   }
 }
