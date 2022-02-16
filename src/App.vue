@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { isKey, VK_BACK_SPACE, VK_BACK } from '@state/keycodes'
 import axios from 'axios';
 import NavBar from '@components/navbar/NavBar.vue';
 export default {
@@ -17,15 +18,25 @@ export default {
       loading: true
     }
   },
+  watch: {
+    $route (to, from){
+      if(to.name !== from.name) {
+        const willfocus = document.getElementById(to.name + '_navbar')
+        willfocus.focus();
+        setTimeout(() => {
+        window.SpatialNavigation.makeFocusable();
+        window.SpatialNavigation.focus();
+      }, 0)
+      }
+    }
+  },
   mounted() {
     this.initNavigation()
     axios.get('/data.json').then((res) => {
       this.appData = res.data
       this.loading = false
       setTimeout(() => {
-        // Make the *currently existing* navigable elements focusable.
         window.SpatialNavigation.makeFocusable();
-        // Focus the first navigable element.
         window.SpatialNavigation.focus();
       }, 0)
     }).catch((err) => {
@@ -42,9 +53,23 @@ export default {
         straightOverlapThreshold: 0.5,
         rememberSource: true,
       })
+      window.addEventListener('keydown', this.onKeyDown)
     },
     destroy() {
       window.SpatialNavigation.uninit()
+      window.removeEventListener('keydown', this.onKeyDown)
+    },
+    onKeyDown($event) {
+      if(isKey($event.keyCode, VK_BACK_SPACE) || isKey($event.keyCode, VK_BACK)) {
+        console.log(this.$route)
+        if(document.activeElement.classList.contains('navbar-item')) {
+          if(this.$route.name !== 'home') {
+            this.$router.push('/')
+          }
+        } else {
+          document.getElementsByClassName('navbar-item')[0].focus()
+        }
+      }
     }
   },
   beforeDestroy() {

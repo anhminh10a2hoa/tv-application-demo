@@ -2,7 +2,7 @@
   <div class="navbar">
     <img src="@assets/images/sofia-digital-logo.png" alt="" />
     <div class="navbar-menu">
-      <a v-for="item in navbarItem" :key="item.title" class="navbar-item dpad-focusable" :href="item.routerLink">{{item.title}}</a>
+      <router-link v-for="item in navbarItem" :key="item.title" class="navbar-item dpad-focusable" :id="item.class + '_navbar'" :to="item.routerLink">{{item.title}}</router-link>
     </div>
   </div>
 </template>

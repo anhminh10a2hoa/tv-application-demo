@@ -2,15 +2,18 @@
   "navbar": [
     {
       "title": "UI App",
-      "routerLink": "/"
+      "routerLink": "/",
+      "class": "home"
     },
     {
       "title": "Players",
-      "routerLink": "/players"
+      "routerLink": "/players",
+      "class": "player"
     },
     {
       "title": "Features",
-      "routerLink": "/features"
+      "routerLink": "/features",
+      "class": "feature"
     }
   ],
   "banner": ["avenger_movie_banner.jpg", "civil_war_movie_banner.jpg", "inception_movie_banner.jpg"],

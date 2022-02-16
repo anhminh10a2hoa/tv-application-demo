@@ -41,16 +41,11 @@ export default {
   methods: {
     registerFocusListerner() {
       window.addEventListener('sn:willfocus', this.onWillFocus)
-      window.addEventListener('keydown', this.onKeyDown)
     },
     unregisterFocusListerner() {
       window.removeEventListener('sn:willfocus', this.onWillFocus)
-      window.removeEventListener('keydown', this.onKeyDown)
     },
     onWillFocus() {
-    },
-    onKeyDown(event) {
-      console.log(event.keyCode)
     },
     destroy() {
       this.unregisterFocusListerner()

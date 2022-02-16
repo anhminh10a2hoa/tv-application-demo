@@ -9,7 +9,8 @@ export default new Router({
   base: '/',
   mode: 'history',
   routes: [
-    { path: '/', component: UIView },
-    { path: '/players', component: PlayerView },
+    { path: '/', name: 'home', component: UIView },
+    { path: '/players', name: 'player', component: PlayerView },
+    { path: '/features', name: 'feature', component: PlayerView },
   ]
 })
