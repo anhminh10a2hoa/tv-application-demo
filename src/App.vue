@@ -2,6 +2,7 @@
   <div class="container" v-if="!loading">
     <NavBar :navbar-item="appData.navbar"/>
     <router-view :app-data="appData" />
+    <ExitModal :open="true"/>
   </div>
   <div v-else>Loading...</div>
 </template>
@@ -10,8 +11,9 @@
 import { isKey, VK_BACK_SPACE, VK_BACK } from '@state/keycodes'
 import axios from 'axios';
 import NavBar from '@components/navbar/NavBar.vue';
+import ExitModal from '@components/modal/ExitModal.vue';
 export default {
-  components: { NavBar },
+  components: { NavBar, ExitModal },
   data() {
     return {
       appData: null,
