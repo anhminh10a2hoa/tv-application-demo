@@ -23,8 +23,9 @@ export default {
 <style lang="scss">
 @import '@design';
 .navbar {
+  position: relative;
   margin-top: 20px;
-  margin-left: 50px;
+  margin-left: 20px;
   height: 80px;
 
   img {
@@ -34,7 +35,7 @@ export default {
   .navbar-menu {
     display: inline-block;
     position: absolute;
-    right: 50px;
+    right: 0px;
     margin-top: -5px;
 
     .navbar-item {

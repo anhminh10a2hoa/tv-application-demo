@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!loading">
+  <div class="app" id="app" v-if="!loading" ref="main">
     <NavBar :navbar-item="appData.navbar"/>
     <router-view :app-data="appData" />
     <ExitModal :open="true"/>
@@ -33,6 +33,7 @@ export default {
     }
   },
   mounted() {
+    window.addEventListener('sn:focused', this.adjustScroll)
     this.initNavigation()
     axios.get('/data.json').then((res) => {
       this.appData = res.data
@@ -60,6 +61,7 @@ export default {
     destroy() {
       window.SpatialNavigation.uninit()
       window.removeEventListener('keydown', this.onKeyDown)
+      window.removeEventListener('sn:focused', this.adjustScroll)
     },
     onKeyDown($event) {
       if(isKey($event.keyCode, VK_BACK_SPACE) || isKey($event.keyCode, VK_BACK)) {
@@ -72,7 +74,32 @@ export default {
           document.getElementsByClassName('navbar-item')[0].focus()
         }
       }
-    }
+    },
+    adjustScroll($event) {
+      const focused = $event.target
+      if (focused) {
+        const mainY =
+          this.$refs.main.getBoundingClientRect().y ||
+          this.$refs.main.getBoundingClientRect().top
+        const focusedY =
+          focused.getBoundingClientRect().y ||
+          focused.getBoundingClientRect().top
+        const relY2 = focusedY - mainY
+        let offset = relY2 * -1
+        offset = offset > -450 ? 0 : offset
+        if(focused.classList.contains('swiper-slide')) {
+          offset += 50
+        }
+        this.offset = offset
+        
+      } else {
+        this.offset = 0
+      }
+      this.$nextTick(() => {
+        document.getElementById('app').scrollTop = 0
+        this.$refs.main.style.transform = `translateY(${this.offset}px)`
+      })
+    },
   },
   beforeDestroy() {
     this.destroy()
@@ -90,7 +117,6 @@ body {
 
 body {
   width: $size-app-width;
-  height: $size-app-height;
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -99,15 +125,17 @@ body {
   background: $color-background;
   color: #000;
   background-image: none !important;
+  height: 100%;
 }
 
-.container {
+.app {
   width: $size-app-width;
-  height: $size-app-height;
   overflow: hidden;
   position: absolute;
-  top: 0px;
   left: 0px;
+  transition: 0.3s ease-in;
+  transition-property: transform;
+  overscroll-behavior: auto;
 }
 
 .dpad-focusable {
