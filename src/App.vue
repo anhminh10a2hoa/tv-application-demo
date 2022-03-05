@@ -143,4 +143,56 @@ body {
     outline: none;
   }
 }
+
+.simple-keyboard {
+  color: $color-black;
+
+  &.hg-theme-default {
+    width: 88%;
+    margin: 0 auto;
+    background-color: transparent;
+
+    .hg-row {
+      display: block;
+      text-align: center;
+
+      .hg-button {
+        display: inline-block;
+        min-width: 3rem;
+        height: 2.5rem;
+        padding: 0 0.325rem;
+        font-size: 1.2rem;
+        color: $color-white;
+        background: rgba(0, 0, 0, 0.47);
+        border: none;
+        box-shadow: none;
+
+        span {
+          line-height: 2.5rem;
+          vertical-align: middle;
+        }
+
+        &:focus {
+          color: $color-text-keyboard-focus;
+          background: $color-grey-light;
+        }
+
+        &.hg-button-space,
+        &.hg-button-backspace,
+        &.hg-button-shift,
+        &.hg-button-enter,
+        &.hg-button-numbers,
+        &.hg-button-abc,
+        &.hg-button-chars {
+          background: $color-grey;
+
+          &:focus {
+            color: $color-text-keyboard-focus;
+            background: $color-grey-light;
+          }
+        }
+      }
+    }
+  }
+}
 </style>
