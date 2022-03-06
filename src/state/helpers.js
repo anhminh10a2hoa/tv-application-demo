@@ -2,6 +2,7 @@ const spatialNavDefaultId = 'default'
 
 export function updateDpad() {
   if (Object.prototype.hasOwnProperty.call(window, 'SpatialNavigation')) {
+    window.SpatialNavigation.init()
     window.SpatialNavigation.clear()
     // Define navigable elements (anchors and elements with "dpad-focusable" class).
     window.SpatialNavigation.add(spatialNavDefaultId, {

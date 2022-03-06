@@ -9,6 +9,7 @@
 
 <script>
 import { isKey, VK_BACK_SPACE, VK_BACK } from '@state/keycodes'
+import { updateDpad } from '@state/helpers'
 import axios from 'axios';
 import NavBar from '@components/navbar/NavBar.vue';
 import ExitModal from '@components/modal/ExitModal.vue';
@@ -25,10 +26,11 @@ export default {
       if(to.name !== from.name) {
         const willfocus = document.getElementById(to.name + '_navbar')
         willfocus.focus();
+        console.log(willfocus)
         setTimeout(() => {
-        window.SpatialNavigation.makeFocusable();
-        window.SpatialNavigation.focus();
-      }, 0)
+          window.SpatialNavigation.makeFocusable();
+          window.SpatialNavigation.focus();
+        }, 0)
       }
     }
   },
@@ -48,14 +50,7 @@ export default {
   },
   methods: {
     initNavigation() {
-      // Initialize
-      window.SpatialNavigation.init()
-      window.SpatialNavigation.add('app', {
-        selector: '.dpad-focusable',
-        straightOnly: true,
-        straightOverlapThreshold: 0.5,
-        rememberSource: true,
-      })
+      updateDpad()
       window.addEventListener('keydown', this.onKeyDown)
     },
     destroy() {
@@ -86,10 +81,7 @@ export default {
           focused.getBoundingClientRect().top
         const relY2 = focusedY - mainY
         let offset = relY2 * -1
-        offset = offset > -450 ? 0 : offset
-        if(focused.classList.contains('swiper-slide')) {
-          offset += 50
-        }
+        offset = offset > -450 ? 0 : focused.classList.contains('swiper-slide') ? offset + 50 : offset
         this.offset = offset
         
       } else {
@@ -146,6 +138,7 @@ body {
 
 .simple-keyboard {
   color: $color-black;
+  font-weight: 600;
 
   &.hg-theme-default {
     width: 88%;

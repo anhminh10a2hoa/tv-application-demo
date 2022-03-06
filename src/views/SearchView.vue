@@ -1,8 +1,15 @@
 <script>
 import Keyboard from '@components/keyboard/keyboard.vue'
+import GridList from '@components/grid/GridList.vue';
 
 export default {
-  components: { Keyboard },
+  components: { Keyboard, GridList },
+  props: {
+    appData: {
+      type: Object,
+      default: () => {}
+    },
+  },
   data() { 
     return {
       input: '',
@@ -52,6 +59,14 @@ export default {
       @onChange="onChange"
       @onKeyPress="onKeyPress"
     />
+    <GridList 
+      v-show="input.length >= 3"
+      v-for="(grid, index) in appData.search" 
+      :key="index" 
+      :title="`Search results for ${input} - ${grid.items.length} programs`" 
+      :program-items="grid.items" 
+      :grid-id="index"
+    />
     <div v-show="showNoResults" class="text">
       <h3>No results for '{{ input }}'</h3>
     </div>
@@ -76,6 +91,9 @@ export default {
       line-height: 2;
       outline: none;
       border-radius: 25px;
+      font-size: 16px;
+      border: 0px solid;
+      font-weight: 600;
     }
   }
 

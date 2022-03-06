@@ -26,5 +26,10 @@
       "title": "Common Movie",
       "items": ["sanquy_movie.jpg", "squidgame_movie.jpg", "vincenzo_movie.jpg", "toyboy_movie.jpg", "hdnk_movie.jpg", "keluadao_movie.jpg"]
     }
+  ],
+  "search": [
+    {
+      "items": ["sanquy_movie.jpg", "squidgame_movie.jpg", "vincenzo_movie.jpg", "toyboy_movie.jpg", "hdnk_movie.jpg", "keluadao_movie.jpg"]
+    }
   ]
 }

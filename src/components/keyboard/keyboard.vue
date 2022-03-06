@@ -1,6 +1,5 @@
 <script>
 import { isKey, VK_ENTER } from '@state/keycodes'
-import { updateDpad } from '@state/helpers'
 import Keyboard from 'simple-keyboard'
 import 'simple-keyboard/build/css/index.css'
 
@@ -140,12 +139,10 @@ export default {
       }
     },
     onInit($event) {
-      updateDpad()
       this.registerKeyListerner()
       this.$emit('onInit', $event)
     },
     onRender() {
-      updateDpad()
       if (this.focus) {
         const buttons = document.getElementsByClassName(this.focus)
         this.focus = null
